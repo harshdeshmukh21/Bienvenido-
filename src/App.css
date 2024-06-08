@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App.css */
+.no-outline {
+    outline: none !important;
+   }
+   
