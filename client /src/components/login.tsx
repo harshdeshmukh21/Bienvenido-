@@ -19,6 +19,7 @@ const Login = () => {
         navigate("/auth");
       });
   };
+
   return (
     <>
       <div
@@ -61,13 +62,12 @@ const Login = () => {
               <div className="text-white mt-8 font-montserrat opacity-60 text-xs">
                 Login with Google?
               </div>
-              <a
-                href="http://"
+              <button
                 className="text-white font-montserrat text-xs mt-6"
                 onClick={signInWithGoogle}
               >
                 <img src={google} alt="google" className="h-[30px] w-[30px]" />
-              </a>
+              </button>
             </div>
           </div>
         </div>

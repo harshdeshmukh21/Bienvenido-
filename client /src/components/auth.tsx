@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const Auth = () => {
   const navigate = useNavigate();
-
-  const LoginButton = () => {
-    navigate("/login");
-  };
 
   const SignupwithFirebase = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -120,13 +117,12 @@ const Auth = () => {
               <div className="text-white mt-4 font-montserrat opacity-60 text-xs">
                 Already have an account?
               </div>
-              <a
-                href="http://"
-                className="text-white mt-4 font-montserrat text-xs"
-                onClick={LoginButton}
+              <Link
+                to="/login"
+                className="text-white mt-4 font-montserrat text-xs no-underline"
               >
                 Log in here
-              </a>
+              </Link>
             </div>
           </div>
         </div>
