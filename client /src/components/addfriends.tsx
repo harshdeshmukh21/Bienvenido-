@@ -1,4 +1,20 @@
+import { useEffect, useState } from "react";
+
 const AddFriends = () => {
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    fetch("/addfriends")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setData(data))
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
   return (
     <div>
       <div
@@ -23,7 +39,9 @@ const AddFriends = () => {
             </div>
 
             <div className="h-[380px] w-1/2 mt-4 flex flex-col items-center justify-center">
-              <div className="h-[350px] w-[280px] border rounded-lg"></div>
+              <div className="h-[350px] w-[280px] border rounded-lg text-white  ">
+                {data ? `Friend: ${data}` : "Loading..."}
+              </div>
             </div>
           </div>
         </div>
