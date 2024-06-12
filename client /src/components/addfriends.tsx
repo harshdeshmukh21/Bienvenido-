@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 
+interface User {
+  username: string;
+  email: string;
+  password: string;
+  conpassword: string;
+}
+
 const AddFriends = () => {
-  const [data, setData] = useState("");
+  const [user, setUser] = useState<User[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/addfriends")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => setData(data))
-      .catch((error) => console.error("Error:", error));
+    const getUsers = async () => {
+      const res = await fetch("http://localhost:4000/addfriends");
+      const json = await res.json();
+
+      if (res.ok) {
+        setUser(json);
+      }
+    };
+    getUsers();
   }, []);
 
   return (
@@ -22,7 +29,7 @@ const AddFriends = () => {
         className="flex h-screen w-screen bg-[url('src/assets/backgrounds/BG-Dark.png')] bg-cover bg-center justify-center items-center"
       >
         <div className="h-[500px] w-[700px] bg-black rounded-lg flex flex-col justify-center items-start">
-          <div className="text-white c mt-4 text-2xl mb-4 text-center w-full font-montserrat">
+          <div className="text-white mt-4 text-2xl mb-4 text-center w-full font-montserrat">
             Add Friends
           </div>
 
@@ -39,8 +46,13 @@ const AddFriends = () => {
             </div>
 
             <div className="h-[380px] w-1/2 mt-4 flex flex-col items-center justify-center">
-              <div className="h-[350px] w-[280px] border rounded-lg text-white font-montserrat p-[30px]">
-                {data ? `${data}` : "Loading..."}
+              <div className="h-[350px] w-[280px] border rounded-lg text-white font-montserrat p-[30px] overflow-y-auto">
+                {user.map((user, index) => (
+                  <div key={index} className="mb-2">
+                    <p>{user.username}</p>
+                    <hr />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
