@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [user, setUser] = useState({
@@ -8,6 +8,8 @@ const Auth = () => {
     password: "",
     conpassword: "",
   });
+
+  const navigate = useNavigate();
 
   let name, value;
   const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +27,7 @@ const Auth = () => {
     const { username, email, password, conpassword } = user;
 
     try {
-      const res = await fetch("http://localhost:4000/addUsers", {
+      const res = await fetch("http://localhost:4000/user/register ", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +43,7 @@ const Auth = () => {
 
       if (res.ok) {
         window.alert(data.message);
+        navigate("/addfriends"); // Navigate to /addfriends after successful user addition
       } else {
         window.alert(data.error);
       }
@@ -51,7 +54,7 @@ const Auth = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      const res = await fetch("http://localhost:4000/users");
+      const res = await fetch("http://localhost:4000/user/register");
       const json = await res.json();
 
       if (res.ok) {

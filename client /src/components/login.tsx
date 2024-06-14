@@ -20,6 +20,34 @@ const Login = () => {
       });
   };
 
+  const handleLogin = async () => {
+    const username = (document.getElementById("username") as HTMLInputElement)
+      ?.value;
+    const email = (document.getElementById("email") as HTMLInputElement)?.value;
+    const password = (document.getElementById("password") as HTMLInputElement)
+      ?.value;
+
+    try {
+      const res = await fetch("http://localhost:4000/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        console.log("Login successful:", data);
+        navigate("/addfriends");
+      } else {
+        console.error("Login failed:", data.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
       <div
@@ -54,7 +82,10 @@ const Login = () => {
               id="password"
             />
 
-            <button className="font-montserrat bg-white text-black p-5 rounded mt-4 text-center h-[20px] flex flex-col justify-center">
+            <button
+              className="font-montserrat bg-white text-black p-5 rounded mt-4 text-center h-[20px] flex flex-col justify-center"
+              onClick={handleLogin}
+            >
               Login
             </button>
 
