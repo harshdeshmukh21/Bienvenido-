@@ -1,22 +1,16 @@
-import { Link } from "react-router-dom";
+import React from "react";
 
-const Chat = () => {
+interface ChatProps {
+  userId: string;
+}
+
+const Chat: React.FC<ChatProps> = ({ userId }) => {
   return (
-    <Link to="chatbox" className="flex flex-row mt-2 mb-2">
-      <img
-        src="src/assets/backgrounds/pfp-color.png"
-        alt="pfp-color"
-        className="w-[40px] h-[40px] ml-2 mt-[2px]"
-      />
-      <div className="flex flex-col">
-        <h1 className="text-white text-[16px] font-xs ml-4 font-montserrat">
-          Dhruv
-        </h1>
-        <h2 className="text-white font-normal text-xs ml-4 opacity-70 font-montserrat">
-          lorem ipsum lorem ipsum
-        </h2>
-      </div>
-    </Link>
+    <div className="chat-item">
+      {/* Use userId to display user information */}
+      <p>User: {userId}</p>
+      {/* Add other chat item content here */}
+    </div>
   );
 };
 

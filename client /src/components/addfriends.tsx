@@ -26,7 +26,7 @@ const AddFriends = () => {
     <div>
       <div
         id="body"
-        className="flex h-screen w-screen bg-[url('src/assets/backgrounds/BG-Dark.png')] bg-cover bg-center justify-center items-center"
+        className="flex h-screen w-screen bg-[url('src/assets/backgrounds/BG-Dark-New.png')] bg-cover bg-center justify-center items-center"
       >
         <div className="h-[500px] w-[700px] bg-black rounded-lg flex flex-col justify-center items-start">
           <div className="text-white mt-4 text-2xl mb-4 text-center w-full font-montserrat">
